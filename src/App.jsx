@@ -1,18 +1,25 @@
 import "./App.scss";
 import Album from "./components/Album/Album";
 import Greeting from "./components/Greeting/Greeting";
-import albums from "./data/albums.json";
+import albumsJson from "./data/albums.json";
 import { useState } from "react";
 
 export default function App() {
+  const [albums, setAlbums] = useState(albumsJson);
   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
-  const handleSelectedAlbum = (id) => {
+  const selectAlbum = (id) => {
     if (id === selectedAlbumId) {
       setSelectedAlbumId(null);
     } else {
       setSelectedAlbumId(id)
     }
+  }
+
+  const removeAlbum = (id) => {
+    // filter creates a new array, no need to spread
+    const newAlbums = albums.filter((album) => album.id !== id);
+    setAlbums(newAlbums);
   }
 
   return (
@@ -29,14 +36,15 @@ export default function App() {
           (album) => {
             return (
               <Album
-                imageSource={album.imageSource}
+                key={album.id}
                 title={album.title}
+                imageSource={album.imageSource}
                 description={album.description}
                 year={album.year}
                 likes={album.likes}
-                selected={album.id === selectedAlbumId}
-                handleSelectedAlbum={() => handleSelectedAlbum(album.id)}
-                key={album.id}
+                isSelected={album.id === selectedAlbumId}
+                selectAlbum={() => selectAlbum(album.id)}
+                removeAlbum={() => removeAlbum(album.id)}
               />
             );
           }
