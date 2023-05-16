@@ -22,6 +22,21 @@ export default function App() {
     setAlbums(newAlbums);
   }
 
+  const likeAlbum = (id) => {
+    const newAlbums = albums.map((album) => {
+      if (album.id === id) {
+        return {
+          ...album,
+          likes: album.likes + 1
+        }
+      } else {
+        return album;
+      }
+    });
+
+    setAlbums(newAlbums);
+  }
+
   return (
     <div className="App">
       <h1>My music collection</h1>
@@ -45,6 +60,7 @@ export default function App() {
                 isSelected={album.id === selectedAlbumId}
                 selectAlbum={() => selectAlbum(album.id)}
                 removeAlbum={() => removeAlbum(album.id)}
+                likeAlbum={()=> likeAlbum(album.id)}
               />
             );
           }

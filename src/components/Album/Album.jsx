@@ -11,6 +11,11 @@ export default function Album(props) {
     props.selectAlbum();
   }
 
+  const handleLikeAlbum = (e) => {
+    e.stopPropagation();
+    props.likeAlbum();
+  }
+
   return (
     <div 
       onClick={handleSelectedAlbum}
@@ -21,7 +26,7 @@ export default function Album(props) {
       <div className="album__details">
         <h2 className="album__title">{props.title}</h2>
         <p>{props.description}</p>
-        <span className="album__like">❤️</span>
+        <span onClick={handleLikeAlbum} className="album__like">❤️</span>
         <span className="album__likes">{props.likes}</span>
         <button onClick={handleRemoveAlbum} className={"album__remove"}>Remove album</button>
       </div>
