@@ -1,0 +1,28 @@
+.album {
+    display: flex;
+    margin: 2rem 1rem;
+    padding: 1rem;
+    border: 1px solid black;
+    width: 35rem;
+
+    &--selected {
+        border-color: green;
+        background-color: rgba(128, 128, 0, 0.7);
+    }
+
+    &__cover {
+        width: 5rem;
+        height: 5rem;
+        margin-right: 1rem;
+        border: 1px solid black;
+    }
+    
+    &__title {
+        margin: 0;
+    }
+
+    &__like {
+        margin-right: 0.25rem;
+        cursor: pointer;
+    }
+}
