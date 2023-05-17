@@ -1,6 +1,7 @@
 import "./App.scss";
 import Album from "./components/Album/Album";
 import Greeting from "./components/Greeting/Greeting";
+import Temperature from "./components/Temperature/Temperature";
 import albumsJson from "./data/albums.json";
 import { useState } from "react";
 
@@ -17,8 +18,10 @@ export default function App() {
   }
 
   const removeAlbum = (id) => {
-    // filter creates a new array, no need to spread
-    const newAlbums = albums.filter((album) => album.id !== id);
+    const newAlbums = albums.filter( (album) => { 
+      return album.id !== id;
+    })
+
     setAlbums(newAlbums);
   }
 
@@ -29,9 +32,9 @@ export default function App() {
           ...album,
           likes: album.likes + 1
         }
-      } else {
-        return album;
       }
+      
+      return album;
     });
 
     setAlbums(newAlbums);
@@ -39,6 +42,8 @@ export default function App() {
 
   return (
     <div className="App">
+      <Temperature />
+
       <h1>My music collection</h1>
       
       <Greeting
